@@ -1,0 +1,19 @@
+#include <egt/ui>
+#include <iostream>
+
+using namespace std;
+using namespace egt;
+
+int main(int argc, char** argv)
+{
+    egt::Application app(argc, argv);
+
+    egt::TopWindow window;
+    egt::Button button(window, "Press Me");
+    //egt::center(button);
+    egt::button.align(AlignFlag::center | AlignFlag::left);
+    window.show();
+
+    return app.run();
+}
+

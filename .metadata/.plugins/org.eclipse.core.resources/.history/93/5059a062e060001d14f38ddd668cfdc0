@@ -1,0 +1,23 @@
+#include <egt/ui>
+using namespace egt;
+using namespace std;
+int main(int argc, const char ** argv) {
+    Application app;
+    TopWindow win;
+
+    VerticalBoxSizer vsizer;
+    win.add(expand(vsizer));
+
+    HorizontalBoxSizer hsizer1;
+    vsizer.add(expand(hsizer1));
+    Button button1(hsizer1, "Button 1");
+    CheckBox checkbox1(hsizer1, "Disable Button 1");
+
+    HorizontalBoxSizer hsizer2;
+    vsizer.add(expand(hsizer2));
+    Button button2(hsizer2, "Button 2");
+    CheckBox checkbox2(hsizer2, "Disable Button 2");
+
+    win.show();
+    return app.run();
+}

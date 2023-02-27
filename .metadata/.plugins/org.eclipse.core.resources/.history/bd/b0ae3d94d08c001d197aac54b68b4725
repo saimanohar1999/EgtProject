@@ -1,0 +1,82 @@
+#include<iostream>
+using namespace std;
+#include <fstream>
+#include <string>
+#include <egt/detail/string.h>
+#include <egt/ui>
+#include <random>
+#include<egt/uiloader.h>
+extern "C" {
+#include <stdio.h> // C standard libraries
+#include <stdlib.h>
+#include <unistd.h>
+#include <fcntl.h>
+
+//#include <linux/gpio.h> // GPIO control not used
+#include <sys/ioctl.h> // interface between user space and kernel in our case with I2C driver
+#include <linux/i2c.h> // I2C interface
+#include <linux/i2c-dev.h> // I2C interface
+
+//#define DEV_GPIO "/dev/gpiochip0" //not used
+#define DEV_I2C "/dev/i2c-1"
+#define DEV_BLUELED "/sys/class/leds/blue/brightness"
+#define DEV_GREENLED "/sys/class/leds/green/brightness"
+
+#define SLAVE_ADDR 0x4C  /* EMC1414 I2C slave address */
+};
+
+#include <egt/ui> // Libs for EGT
+#include <iostream>
+#include <string>
+#include <fstream>
+
+using namespace egt;
+using namespace std;
+
+extern "C" {
+
+		int readtemp();
+    };
+
+char timersecflag =0;
+int main(int argc, char** argv)
+{
+
+ egt::Application app(argc, argv);
+ egt::experimental::UiLoader loader;
+
+ auto window = std::static_pointer_cast<egt::Window>(loader.load("file:ui.xml"));
+auto main_screen=window->find_child<egt::Window>("mainscreen");
+auto startup_screen=window->find_child<egt::Window>("Window9");
+auto power_off_button=window->find_child<egt::Button>("Button9");
+power_off_button->fill_flags().clear();
+
+
+power_off_button->on_click([&main_screen,&startup_screen] (egt::Event &)
+{
+	main_screen->hide();
+startup_screen->show();
+
+});
+
+window->on_event([&main_screen,&startup_screen] (egt::Event & event)
+	{
+  	 switch (event.key().keycode)//Is the event happening a keypress ?
+		{
+			case egt::EKEY_0: //Is the key pressed the "KEY_0" corresponding to the K1 button. (See the training for more explainations)
+			{
+				main_screen->hide();
+				startup_screen->show();
+				break;
+			}
+
+			default:
+				break;
+		}
+		}, {egt::EventId::keyboard_up});//Consider the event only when the finger has moved up from the K1 button
+
+
+
+ return app.run();
+
+}

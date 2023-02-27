@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete resource &apos;EgtProject/smbus.h&apos;" deleteContents="false" description="Delete resource &apos;EgtProject/smbus.h&apos;" element1="/EgtProject/smbus.h" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1672051733617"/>
+</session>

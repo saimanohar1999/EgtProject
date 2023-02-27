@@ -1,0 +1,24 @@
+#include <egt/ui>
+
+using namespace egt;
+
+int main(int argc, const char ** argv)
+{
+    Application app;
+    TopWindow window;
+
+    StaticGrid grid(Rect(20, 20, 750, 440),
+                    StaticGrid::GridSize(3, 3), 10);
+
+    window.add(grid);
+
+    for (auto i = 1; i <= 7; ++i)
+    {
+        auto button = std::make_shared < Button > ("Button " +
+                                              std::to_string(i));
+        grid.add(expand(button));
+    }
+
+    window.show();
+    return app.run();
+}

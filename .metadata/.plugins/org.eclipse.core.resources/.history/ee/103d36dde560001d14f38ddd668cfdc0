@@ -1,0 +1,65 @@
+#include <egt/ui>
+#include <iostream>
+using namespace std;
+using namespace egt;
+
+int main(int argc, const char ** argv)
+{
+    Application app;
+    TopWindow window;
+    Button button(window, "Press Me");
+    center(button);
+
+    //One-shot timer
+    Timer timer1(std::chrono::seconds(3));
+    timer1.on_timeout([]()
+    {
+        cout << "One shot timer fired!" << endl;
+    });
+    timer1.start();
+
+    //periodic timer
+    Label CPUlabel("CPU:---", Rect(0, 0, 100, 50));
+    window.add(bottom(CPUlabel));
+    egt::experimental::CPUMonitorUsage tools;
+    PeriodicTimer cputimer(std::chrono::seconds(1));
+    cputimer.on_timeout([ & CPUlabel, & tools]() {
+        cout << "periodic timer fired!" << endl;
+        tools.update();
+        ostringstream ss;
+        ss << "CPU: " << static_cast < int > (tools.usage()) << "%";
+        CPUlabel.text(ss.str());
+    });
+    cputimer.start();
+
+    // Animation
+    Label label("Ensemble Graphics Toolkit”, Rect(20, 100, 200, 50), AlignFlag::center);
+    label.font(Font(35));
+    window.add(label);
+
+    PropertyAnimator animate1(window.width(), 200,
+        std::chrono::seconds(5), easing_bounce);
+    animate1.on_change([ & label](int value) {
+        label.x(value);
+    });
+//    animate1.start();
+
+    // Animation Sequence
+    int min_value = 0 – label.width();
+    PropertyAnimator animate2(200, min_value,
+        std::chrono::seconds(5), easing_linear);
+    animate2.on_change([ & label](int value)
+    {
+        label.x(value);
+    });
+
+    AnimationDelay delay(std::chrono::seconds(1));
+    AnimationSequence sequence(true);
+    sequence.add(animate1);
+    sequence.add(delay);
+    sequence.add(animate2);
+    sequence.start();
+
+    window.show();
+    return app.run();
+}

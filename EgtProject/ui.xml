@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="utf-8"?>
+<egt>
+	<theme>
+		<property name="type">DefaultTheme</property>
+	</theme>
+	<widgets>
+		<widget name="Window0" type="TopWindow">
+			<property name="pixelformat">argb8888</property>
+			<property name="windowhint">automatic</property>
+			<property name="show">true</property>
+			<property name="width">800</property>
+			<property name="height">480</property>
+			<property name="fillflags">solid</property>
+			<widget name="mainscreen" type="Window">
+				<property name="pixelformat">argb8888</property>
+				<property name="windowhint">automatic</property>
+				<property name="show">true</property>
+				<property name="width">800</property>
+				<property name="height">480</property>
+				<property name="fillflags">solid</property>
+				<widget name="mainscreen_bg" type="ImageLabel">
+					<property name="show">true</property>
+					<property name="width">800</property>
+					<property name="height">480</property>
+					<property name="text">ImageLabel8</property>
+					<property name="text_align">center_horizontal|center_vertical</property>
+					<property name="showlabel">false</property>
+					<property name="image">file:cyberpunk-robot-wallpaper-800x480_12.jpg</property>
+					<property name="image_align">center_horizontal|center_vertical|expand_horizontal|expand_vertical</property>
+				</widget>
+				<widget name="Button16" type="Button">
+					<property name="show">true</property>
+					<property name="x">89</property>
+					<property name="y">316</property>
+					<property name="width">104</property>
+					<property name="height">57</property>
+					<property name="border_radius">4</property>
+					<property name="fillflags">blend</property>
+					<property name="color" id="bg" group="normal">ffffffff</property>
+					<property name="color" id="text" group="normal">000000ff</property>
+					<property name="color" id="text_highlight" group="normal">ff69b4ff</property>
+					<property name="color" id="cursor" group="normal">ff0000ff</property>
+					<property name="color" id="border" group="normal">404040ff</property>
+					<property name="color" id="button_bg" group="normal">ed192dff</property>
+					<property name="color" id="button_fg" group="normal">ed192dff</property>
+					<property name="color" id="button_text" group="normal">ffffffff</property>
+					<property name="color" id="label_bg" group="normal">ffffffff</property>
+					<property name="color" id="label_text" group="normal">000000ff</property>
+					<property name="color" id="bg" group="active">ffffffff</property>
+					<property name="color" id="text" group="active">000000ff</property>
+					<property name="color" id="text_highlight" group="active">ff69b4ff</property>
+					<property name="color" id="cursor" group="active">ff0000ff</property>
+					<property name="color" id="border" group="active">ed192dff</property>
+					<property name="color" id="button_bg" group="active">c01f2aff</property>
+					<property name="color" id="button_fg" group="active">ed192dff</property>
+					<property name="color" id="button_text" group="active">ffffffff</property>
+					<property name="color" id="label_bg" group="active">ffffffff</property>
+					<property name="color" id="label_text" group="active">808080ff</property>
+					<property name="color" id="bg" group="disabled">ffffffff</property>
+					<property name="color" id="text" group="disabled">989a9aff</property>
+					<property name="color" id="text_highlight" group="disabled">ff69b4ff</property>
+					<property name="color" id="cursor" group="disabled">ff0000ff</property>
+					<property name="color" id="border" group="disabled">cbcecfff</property>
+					<property name="color" id="button_bg" group="disabled">cbcecfff</property>
+					<property name="color" id="button_fg" group="disabled">cbcecfff</property>
+					<property name="color" id="button_text" group="disabled">000000ff</property>
+					<property name="color" id="label_bg" group="disabled">ffffffff</property>
+					<property name="color" id="label_text" group="disabled">000000ff</property>
+					<property name="color" id="bg" group="checked">ffffffff</property>
+					<property name="color" id="text" group="checked">000000ff</property>
+					<property name="color" id="text_highlight" group="checked">ff69b4ff</property>
+					<property name="color" id="cursor" group="checked">ff0000ff</property>
+					<property name="color" id="border" group="checked">ed192dff</property>
+					<property name="color" id="button_bg" group="checked">ed192dff</property>
+					<property name="color" id="button_fg" group="checked">ed192dff</property>
+					<property name="color" id="button_text" group="checked">ffffffff</property>
+					<property name="color" id="label_bg" group="checked">ed192dff</property>
+					<property name="color" id="label_text" group="checked">000000ff</property>
+					<property name="text">APPS</property>
+					<property name="text_align">center_horizontal|center_vertical</property>
+				</widget>
+			</widget>
+			<widget name="Window9" type="Window">
+				<property name="pixelformat">argb8888</property>
+				<property name="windowhint">automatic</property>
+				<property name="show">false</property>
+				<property name="width">800</property>
+				<property name="height">480</property>
+				<property name="fillflags">solid</property>
+				<widget name="ImageLabel11" type="ImageLabel">
+					<property name="show">true</property>
+					<property name="width">800</property>
+					<property name="height">480</property>
+					<property name="text">ImageLabel11</property>
+					<property name="text_align">center_horizontal|center_vertical</property>
+					<property name="showlabel">false</property>
+					<property name="image">file:cyberpunk-robot-wallpaper-800x480_12.jpg</property>
+					<property name="image_align">center_horizontal|center_vertical|expand_horizontal|expand_vertical</property>
+				</widget>
+				<widget name="Label12" type="Label">
+					<property name="show">true</property>
+					<property name="x">276</property>
+					<property name="y">406</property>
+					<property name="width">254</property>
+					<property name="height">34</property>
+					<property name="font" weight="bold" slant="normal" size="24.000000">Rachana</property>
+					<property name="color" id="bg" group="normal">ffffffff</property>
+					<property name="color" id="text" group="normal">ff1b12ff</property>
+					<property name="color" id="text_highlight" group="normal">ff69b4ff</property>
+					<property name="color" id="cursor" group="normal">ff4708ff</property>
+					<property name="color" id="border" group="normal">ed192dff</property>
+					<property name="color" id="button_bg" group="normal">ed192dff</property>
+					<property name="color" id="button_fg" group="normal">ed192dff</property>
+					<property name="color" id="button_text" group="normal">ff0000ff</property>
+					<property name="color" id="label_bg" group="normal">808080ff</property>
+					<property name="color" id="label_text" group="normal">f9f9f9ff</property>
+					<property name="color" id="bg" group="active">ffffffff</property>
+					<property name="color" id="text" group="active">ff1e17ff</property>
+					<property name="color" id="text_highlight" group="active">ff69b4ff</property>
+					<property name="color" id="cursor" group="active">ff0000ff</property>
+					<property name="color" id="border" group="active">ed192dff</property>
+					<property name="color" id="button_bg" group="active">c01f2aff</property>
+					<property name="color" id="button_fg" group="active">ed192dff</property>
+					<property name="color" id="button_text" group="active">ffffffff</property>
+					<property name="color" id="label_bg" group="active">ffffffff</property>
+					<property name="color" id="label_text" group="active">808080ff</property>
+					<property name="color" id="bg" group="disabled">ffffffff</property>
+					<property name="color" id="text" group="disabled">989a9aff</property>
+					<property name="color" id="text_highlight" group="disabled">ff69b4ff</property>
+					<property name="color" id="cursor" group="disabled">ff0000ff</property>
+					<property name="color" id="border" group="disabled">cbcecfff</property>
+					<property name="color" id="button_bg" group="disabled">cbcecfff</property>
+					<property name="color" id="button_fg" group="disabled">cbcecfff</property>
+					<property name="color" id="button_text" group="disabled">000000ff</property>
+					<property name="color" id="label_bg" group="disabled">ffffffff</property>
+					<property name="color" id="label_text" group="disabled">ff0000ff</property>
+					<property name="color" id="bg" group="checked">ffffffff</property>
+					<property name="color" id="text" group="checked">000000ff</property>
+					<property name="color" id="text_highlight" group="checked">ff69b4ff</property>
+					<property name="color" id="cursor" group="checked">ff200cff</property>
+					<property name="color" id="border" group="checked">ed192dff</property>
+					<property name="color" id="button_bg" group="checked">ed192dff</property>
+					<property name="color" id="button_fg" group="checked">ed192dff</property>
+					<property name="color" id="button_text" group="checked">ffffffff</property>
+					<property name="color" id="label_bg" group="checked">ed192dff</property>
+					<property name="color" id="label_text" group="checked">000000ff</property>
+					<property name="text">Demo by CHE-CAE Team</property>
+					<property name="text_align">center_horizontal|bottom</property>
+				</widget>
+				<widget name="ImageButton18" type="ImageButton">
+					<property name="show">true</property>
+					<property name="x">115</property>
+					<property name="y">148</property>
+					<property name="width">236</property>
+					<property name="height">198</property>
+					<property name="border_radius">4</property>
+					<property name="fillflags">blend</property>
+					<property name="text">ImageButton18</property>
+					<property name="text_align">center_horizontal|center_vertical</property>
+					<property name="showlabel">false</property>
+					<property name="image" hscale="0.551643" vscale="0.55">file:pngtree-abstract-heart-beats-line-life-image_1320159.jpg</property>
+					<property name="image_align">center_horizontal|center_vertical|expand_horizontal|expand_vertical</property>
+				</widget>
+				<widget name="ImageButton19" type="ImageButton">
+					<property name="show">true</property>
+					<property name="x">478</property>
+					<property name="y">159</property>
+					<property name="width">255</property>
+					<property name="height">179</property>
+					<property name="border_radius">4</property>
+					<property name="fillflags">blend</property>
+					<property name="text">ImageButton19</property>
+					<property name="text_align">center_horizontal|center_vertical</property>
+					<property name="showlabel">false</property>
+					<property name="image" hscale="0.947955" vscale="0.951872">file:temperature.jpg</property>
+					<property name="image_align">center_horizontal|center_vertical|expand_horizontal|expand_vertical</property>
+				</widget>
+			</widget>
+			<widget name="Window14" type="Window">
+				<property name="pixelformat">argb8888</property>
+				<property name="windowhint">automatic</property>
+				<property name="show">false</property>
+				<property name="width">800</property>
+				<property name="height">480</property>
+				<property name="fillflags">solid</property>
+				<widget name="ImageLabel15" type="ImageLabel">
+					<property name="show">true</property>
+					<property name="width">800</property>
+					<property name="height">480</property>
+					<property name="text">ImageLabel15</property>
+					<property name="text_align">center_horizontal|center_vertical</property>
+					<property name="showlabel">false</property>
+					<property name="image">file:cyberpunk-robot-wallpaper-800x480_12.jpg</property>
+					<property name="image_align">center_horizontal|center_vertical|expand_horizontal|expand_vertical</property>
+				</widget>
+				<widget name="ImageLabel16" type="ImageLabel">
+					<property name="show">true</property>
+					<property name="x">50</property>
+					<property name="y">9</property>
+					<property name="width">296</property>
+					<property name="height">447</property>
+					<property name="text">ImageLabel16</property>
+					<property name="text_align">center_horizontal|center_vertical</property>
+					<property name="showlabel">false</property>
+					<property name="image" hscale="0.443114" vscale="0.44519">file:pet.jpg</property>
+					<property name="image_align">center_horizontal|center_vertical|expand_horizontal|expand_vertical</property>
+				</widget>
+				<widget name="ImageLabel17" type="ImageLabel">
+					<property name="show">true</property>
+					<property name="x">449</property>
+					<property name="y">96</property>
+					<property name="width">310</property>
+					<property name="height">267</property>
+					<property name="text">ImageLabel17</property>
+					<property name="text_align">center_horizontal|center_vertical</property>
+					<property name="showlabel">false</property>
+					<property name="image" hscale="1.12727" vscale="1.13115">file:AIIII.jpeg</property>
+					<property name="image_align">center_horizontal|center_vertical|expand_horizontal|expand_vertical</property>
+				</widget>
+				<widget name="Label19" type="Label">
+					<property name="show">true</property>
+					<property name="x">553</property>
+					<property name="y">104</property>
+					<property name="width">100</property>
+					<property name="height">100</property>
+					<property name="font" weight="normal" slant="normal" size="20.000000">Sans Serif</property>
+					<property name="color" id="bg" group="normal">ffffffff</property>
+					<property name="color" id="text" group="normal">000000ff</property>
+					<property name="color" id="text_highlight" group="normal">ff69b4ff</property>
+					<property name="color" id="cursor" group="normal">ff0000ff</property>
+					<property name="color" id="border" group="normal">ed192dff</property>
+					<property name="color" id="button_bg" group="normal">ed192dff</property>
+					<property name="color" id="button_fg" group="normal">ed192dff</property>
+					<property name="color" id="button_text" group="normal">ffffffff</property>
+					<property name="color" id="label_bg" group="normal">ffffffff</property>
+					<property name="color" id="label_text" group="normal">fcfcfcff</property>
+					<property name="color" id="bg" group="active">ffffffff</property>
+					<property name="color" id="text" group="active">000000ff</property>
+					<property name="color" id="text_highlight" group="active">ff69b4ff</property>
+					<property name="color" id="cursor" group="active">ff0000ff</property>
+					<property name="color" id="border" group="active">ed192dff</property>
+					<property name="color" id="button_bg" group="active">c01f2aff</property>
+					<property name="color" id="button_fg" group="active">ed192dff</property>
+					<property name="color" id="button_text" group="active">ffffffff</property>
+					<property name="color" id="label_bg" group="active">ffffffff</property>
+					<property name="color" id="label_text" group="active">808080ff</property>
+					<property name="color" id="bg" group="disabled">ffffffff</property>
+					<property name="color" id="text" group="disabled">989a9aff</property>
+					<property name="color" id="text_highlight" group="disabled">ff69b4ff</property>
+					<property name="color" id="cursor" group="disabled">ff0000ff</property>
+					<property name="color" id="border" group="disabled">cbcecfff</property>
+					<property name="color" id="button_bg" group="disabled">cbcecfff</property>
+					<property name="color" id="button_fg" group="disabled">cbcecfff</property>
+					<property name="color" id="button_text" group="disabled">000000ff</property>
+					<property name="color" id="label_bg" group="disabled">ffffffff</property>
+					<property name="color" id="label_text" group="disabled">000000ff</property>
+					<property name="color" id="bg" group="checked">ffffffff</property>
+					<property name="color" id="text" group="checked">000000ff</property>
+					<property name="color" id="text_highlight" group="checked">ff69b4ff</property>
+					<property name="color" id="cursor" group="checked">ff0000ff</property>
+					<property name="color" id="border" group="checked">ed192dff</property>
+					<property name="color" id="button_bg" group="checked">ed192dff</property>
+					<property name="color" id="button_fg" group="checked">ed192dff</property>
+					<property name="color" id="button_text" group="checked">ffffffff</property>
+					<property name="color" id="label_bg" group="checked">ed192dff</property>
+					<property name="color" id="label_text" group="checked">000000ff</property>
+					<property name="text">AI Mode</property>
+					<property name="text_align">center_horizontal|center_vertical</property>
+				</widget>
+				<widget name="Label20" type="Label">
+					<property name="show">true</property>
+					<property name="x">136</property>
+					<property name="y">106</property>
+					<property name="width">100</property>
+					<property name="height">100</property>
+					<property name="font" weight="normal" slant="normal" size="20.000000">Sans Serif</property>
+					<property name="color" id="bg" group="normal">ffffffff</property>
+					<property name="color" id="text" group="normal">000000ff</property>
+					<property name="color" id="text_highlight" group="normal">ff69b4ff</property>
+					<property name="color" id="cursor" group="normal">ff0000ff</property>
+					<property name="color" id="border" group="normal">ed192dff</property>
+					<property name="color" id="button_bg" group="normal">ed192dff</property>
+					<property name="color" id="button_fg" group="normal">ed192dff</property>
+					<property name="color" id="button_text" group="normal">ffffffff</property>
+					<property name="color" id="label_bg" group="normal">ffffffff</property>
+					<property name="color" id="label_text" group="normal">fdfdfdff</property>
+					<property name="color" id="bg" group="active">ffffffff</property>
+					<property name="color" id="text" group="active">000000ff</property>
+					<property name="color" id="text_highlight" group="active">ff69b4ff</property>
+					<property name="color" id="cursor" group="active">ff0000ff</property>
+					<property name="color" id="border" group="active">ed192dff</property>
+					<property name="color" id="button_bg" group="active">c01f2aff</property>
+					<property name="color" id="button_fg" group="active">ed192dff</property>
+					<property name="color" id="button_text" group="active">ffffffff</property>
+					<property name="color" id="label_bg" group="active">ffffffff</property>
+					<property name="color" id="label_text" group="active">808080ff</property>
+					<property name="color" id="bg" group="disabled">ffffffff</property>
+					<property name="color" id="text" group="disabled">989a9aff</property>
+					<property name="color" id="text_highlight" group="disabled">ff69b4ff</property>
+					<property name="color" id="cursor" group="disabled">ff0000ff</property>
+					<property name="color" id="border" group="disabled">cbcecfff</property>
+					<property name="color" id="button_bg" group="disabled">cbcecfff</property>
+					<property name="color" id="button_fg" group="disabled">cbcecfff</property>
+					<property name="color" id="button_text" group="disabled">000000ff</property>
+					<property name="color" id="label_bg" group="disabled">ffffffff</property>
+					<property name="color" id="label_text" group="disabled">000000ff</property>
+					<property name="color" id="bg" group="checked">ffffffff</property>
+					<property name="color" id="text" group="checked">000000ff</property>
+					<property name="color" id="text_highlight" group="checked">ff69b4ff</property>
+					<property name="color" id="cursor" group="checked">ff0000ff</property>
+					<property name="color" id="border" group="checked">ed192dff</property>
+					<property name="color" id="button_bg" group="checked">ed192dff</property>
+					<property name="color" id="button_fg" group="checked">ed192dff</property>
+					<property name="color" id="button_text" group="checked">ffffffff</property>
+					<property name="color" id="label_bg" group="checked">ed192dff</property>
+					<property name="color" id="label_text" group="checked">000000ff</property>
+					<property name="text">Pet Mode</property>
+					<property name="text_align">center_horizontal|center_vertical</property>
+				</widget>
+			</widget>
+			<widget name="Window15" type="Window">
+				<property name="pixelformat">argb8888</property>
+				<property name="windowhint">automatic</property>
+				<property name="show">false</property>
+				<property name="width">800</property>
+				<property name="height">480</property>
+				<property name="fillflags">solid</property>
+				<widget name="BoxSizer16" type="HorizontalBoxSizer">
+					<property name="orient">horizontal</property>
+					<property name="justify">middle</property>
+					<property name="show">true</property>
+					<property name="x">47</property>
+					<property name="y">33</property>
+					<property name="width">578</property>
+					<property name="height">356</property>
+				</widget>
+				<widget name="BoxSizer17" type="VerticalBoxSizer">
+					<property name="orient">vertical</property>
+					<property name="justify">middle</property>
+					<property name="show">true</property>
+					<property name="x">46</property>
+					<property name="y">34</property>
+					<property name="width">578</property>
+					<property name="height">356</property>
+				</widget>
+				<widget name="LineChart18" type="LineChart">
+					<property name="show">true</property>
+					<property name="x">-7</property>
+					<property name="y">10</property>
+					<property name="width">630</property>
+					<property name="height">402</property>
+					<property name="xlabel"/>
+					<property name="ylabel"/>
+					<property name="title"/>
+					<property name="gridflags">box_ticks</property>
+					<property name="gridwidth">1</property>
+					<property name="linewidth">2</property>
+				</widget>
+				<widget name="Label19" type="Label">
+					<property name="show">true</property>
+					<property name="x">637</property>
+					<property name="y">90</property>
+					<property name="width">100</property>
+					<property name="height">100</property>
+					<property name="text">Label19</property>
+					<property name="text_align">center_horizontal|center_vertical</property>
+				</widget>
+				<widget name="Label20" type="Label">
+					<property name="show">true</property>
+					<property name="x">210</property>
+					<property name="y">-26</property>
+					<property name="width">100</property>
+					<property name="height">100</property>
+					<property name="text">Label20</property>
+					<property name="text_align">center_horizontal|center_vertical</property>
+				</widget>
+				<widget name="Label21" type="Label">
+					<property name="show">true</property>
+					<property name="x">228</property>
+					<property name="y">374</property>
+					<property name="width">100</property>
+					<property name="height">100</property>
+					<property name="text">Label21</property>
+					<property name="text_align">center_horizontal|center_vertical</property>
+				</widget>
+			</widget>
+			<widget name="Window22" type="Window">
+				<property name="pixelformat">argb8888</property>
+				<property name="windowhint">automatic</property>
+				<property name="show">false</property>
+				<property name="width">800</property>
+				<property name="height">480</property>
+				<property name="fillflags">solid</property>
+				<widget name="Frame23" type="Frame">
+					<property name="show">true</property>
+					<property name="width">800</property>
+					<property name="height">480</property>
+				</widget>
+			</widget>
+		</widget>
+	</widgets>
+</egt>
+

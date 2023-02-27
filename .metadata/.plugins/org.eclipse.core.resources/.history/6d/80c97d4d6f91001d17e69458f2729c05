@@ -1,0 +1,191 @@
+/*
+ * swipe.cpp
+ *
+ *  Created on: 05-Jan-2023
+ *      Author: i63349-lnx
+ */
+#include <string>
+#include <ctime> //For time management purposes
+#include <memory>
+#include <egt/ui>// Load EGT
+#include <egt/uiloader.h> //Load the UI Loader from EGT
+//#include "time_management.h" //Load a file created to manage date and time.
+
+//Optionnal : Red LED Blinkig when reaching 100% of batterry charge
+#include <iostream> //Two includes to manipulate folders.
+#include <fstream>
+
+#include <stdio.h> // C standard libraries
+#include <stdlib.h>
+#include <unistd.h>
+#include <fcntl.h>
+
+//#include <linux/gpio.h> // GPIO control not used
+#include <sys/ioctl.h> // interface between user space and kernel in our case with I2C driver
+#include <linux/i2c.h> // I2C interface
+#include <linux/i2c-dev.h> // I2C interface
+
+//#define DEV_GPIO "/dev/gpiochip0" //not used
+#define DEV_I2C "/dev/i2c-1"
+#define DEV_BLUELED "/sys/class/leds/blue/brightness"
+#define DEV_GREENLED "/sys/class/leds/green/brightness"
+#include<iostream>
+using namespace std;
+
+
+
+extern "C" {
+#include <stdio.h> // C standard libraries
+#include <stdlib.h>
+#include <unistd.h>
+#include <fcntl.h>
+
+//#include <linux/gpio.h> // GPIO control not used
+#include <sys/ioctl.h> // interface between user space and kernel in our case with I2C driver
+#include <linux/i2c.h> // I2C interface
+#include <linux/i2c-dev.h> // I2C interface
+
+//#define DEV_GPIO "/dev/gpiochip0" //not used
+#define DEV_I2C "/dev/i2c-1"
+#define DEV_BLUELED "/sys/class/leds/blue/brightness"
+#define DEV_GREENLED "/sys/class/leds/green/brightness"
+
+#define SLAVE_ADDR 0x4C  /* EMC1414 I2C slave address */
+};
+
+#include <egt/ui> // Libs for EGT
+#include <iostream>
+#include <string>
+#include <fstream>
+
+using namespace egt;
+using namespace std;
+
+
+extern "C" {
+
+		int outfunction();
+    };
+
+char timersecflag =0;
+
+
+class SwipeDetect
+{
+public:
+
+    using SwipeCallback = std::function<void(const std::string& direction)>;
+
+    SwipeDetect() = delete;
+
+    explicit SwipeDetect(SwipeCallback callback)
+        : m_callback(std::move(callback))
+    {
+    }
+
+    void handle(egt::Event& event)
+    {
+        switch (event.id())
+        {
+        case egt::EventId::raw_pointer_down:
+        {
+            m_start = event.pointer().point;
+            m_start_time = std::chrono::steady_clock::now();
+            break;
+        }
+        case egt::EventId::raw_pointer_up:
+        {
+            const auto elapsed = std::chrono::steady_clock::now() - m_start_time;
+            if (elapsed <= m_allowed_time)
+            {
+                const auto dist = m_start - event.pointer().point;
+
+                if (std::abs(dist.x()) >= m_threshold && std::abs(dist.y()) <= m_restraint)
+                    m_callback((dist.x() < 0) ? "left" : "right");
+                else if (std::abs(dist.y()) >= m_threshold && std::abs(dist.x()) <= m_restraint)
+                    m_callback((dist.y() < 0) ? "up" : "down");
+            };
+
+            break;
+        }
+        default:
+            break;
+        }
+    }
+
+
+    void threshold(int value)
+    {
+        m_threshold = value;
+    }
+
+    int threshold() const
+    {
+        return m_threshold;
+    }
+
+    void restraint(int value)
+    {
+        m_restraint = value;
+    }
+
+    int restraint() const
+    {
+        return m_restraint;
+    }
+
+    void allowed_time(const std::chrono::milliseconds& value)
+    {
+        m_allowed_time = value;
+    }
+
+    std::chrono::milliseconds allowed_time() const
+    {
+        return m_allowed_time;
+    }
+
+protected:
+
+    /// Required min distance traveled.
+    int m_threshold{150};
+    /// Maximum distance allowed at the same time.
+    int m_restraint{100};
+    /// Maximum time allowed to travel.
+    std::chrono::milliseconds m_allowed_time{300};
+
+private:
+
+    /// Starting point
+    egt::DisplayPoint m_start;
+    /// Start time of m_start
+    std::chrono::time_point<std::chrono::steady_clock> m_start_time;
+    /// Callback to invoke when finished.
+    SwipeCallback m_callback;
+};
+int count1 {};
+int main(int argc, char** argv)
+{
+count1=0;
+ egt::Application app(argc, argv);
+ egt::experimental::UiLoader loader;
+ egt::TopWindow window1;
+ window1.background(egt::Image("file:cyberpunk-robot-wallpaper-800x480_12.jpg"));
+ Button button(window1, "Press Me");
+ center(button);
+
+ button.on_event([ & ](Event & event)
+ 		{
+ 	if (event.id() == EventId::pointer_click)
+ 	{   cout << "clicked!" << endl;
+ window1.hide();
+
+ //window1.show();
+ 	}
+ //auto window = std::static_pointer_cast<egt::Window>(loader.load("file:ui.xml"));
+ 	});
+ window1.show();
+ return app.run();
+
+}
+
+

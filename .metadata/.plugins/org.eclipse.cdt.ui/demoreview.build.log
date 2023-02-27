@@ -1,0 +1,17 @@
+19:59:29 **** Incremental Build of configuration Debug for project demoreview ****
+make all 
+Building file: ../reviewcode.cpp
+Invoking: Cross G++ Compiler
+arm-buildroot-linux-gnueabi-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"reviewcode.d" -MT"reviewcode.o" -o "reviewcode.o" "../reviewcode.cpp"
+In file included from /home/i63349-lnx/manohar/newbb/buildroot-at91/output/host/arm-buildroot-linux-gnueabi/sysroot/usr/include/egt/button.h:17,
+                 from /home/i63349-lnx/manohar/newbb/buildroot-at91/output/host/arm-buildroot-linux-gnueabi/sysroot/usr/include/egt/ui:16,
+                 from ../reviewcode.cpp:2:
+/home/i63349-lnx/manohar/newbb/buildroot-at91/output/host/arm-buildroot-linux-gnueabi/sysroot/usr/include/egt/image.h:14:10: fatal error: cairo.h: No such file or directory
+   14 | #include <cairo.h>
+      |          ^~~~~~~~~
+compilation terminated.
+make: *** [subdir.mk:20: reviewcode.o] Error 1
+"make all" terminated with exit code 2. Build might be incomplete.
+
+19:59:33 Build Failed. 2 errors, 0 warnings. (took 3s.802ms)
+

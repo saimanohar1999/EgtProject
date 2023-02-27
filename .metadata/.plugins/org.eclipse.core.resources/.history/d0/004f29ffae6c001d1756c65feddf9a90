@@ -1,0 +1,20 @@
+#include <egt/ui>
+#include <iostream>
+using namespace std;
+using namespace egt;
+
+int main(int argc, const char** argv)
+{
+  Application app;
+  TopWindow window;
+  egt::HorizontalBoxSizer sizer;
+  window.add(center(sizer));
+
+  egt::ImageLabel label1(sizer, egt::Image("icons:unlock.png"));
+  egt::ImageLabel label2(sizer, egt::Image("icons:paint.png"));
+  egt::ImageLabel label3(sizer, egt::Image("icons:battery.png"));
+  egt::ImageLabel label4(sizer, egt::Image("icons:ok.png"));
+
+  window.show();
+  return app.run();
+}

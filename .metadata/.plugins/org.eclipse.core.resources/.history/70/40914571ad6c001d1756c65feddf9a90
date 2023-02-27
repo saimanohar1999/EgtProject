@@ -1,0 +1,9 @@
+            egt::TopWindow window;
+
+            egt::VideoWindow player(window.content_area(), "file:assets/video.mp4");
+            window.add(player);
+            player.volume(50);
+            player.show();
+            player.play();
+
+            window.show();

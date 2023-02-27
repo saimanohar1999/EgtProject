@@ -1,0 +1,37 @@
+*
+ * Copyright (C) 2018 Microchip Technology Inc.  All rights reserved.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+#include <chrono>
+#include <cxxopts.hpp>
+#include <egt/detail/string.h>
+#include <egt/ui>
+#include <sstream>
+#include <string>
+
+// warning: not UTF-8 safe
+static std::string line_break(const std::string& in, size_t width = 50)
+{
+    std::string out;
+    std::string tmp;
+    char last = '\0';
+    size_t i = 0;
+
+    for (auto& cur : in)
+    {
+        if (++i == width)
+        {
+            tmp = egt::detail::ltrim(tmp);
+            out += "\n" + tmp;
+            i = tmp.length();
+            tmp.clear();
+        }
+        else if (std::isspace(cur) && !std::isspace(last))
+        {
+            out += tmp;
+            tmp.clear();
+        }
+        tmp += cur;
+        last = cur;
+    }

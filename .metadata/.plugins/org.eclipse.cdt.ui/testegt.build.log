@@ -1,0 +1,6 @@
+11:06:44 **** Incremental Build of configuration Debug for project testegt ****
+make all 
+make: Nothing to be done for 'all'.
+
+11:06:45 Build Finished. 0 errors, 0 warnings. (took 639ms)
+

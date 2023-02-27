@@ -1,0 +1,35 @@
+#include <egt/ui>
+#include <iostream>
+using namespace std;
+using namespace egt;
+
+int main(int argc, const char ** argv)
+{
+  Application app;
+  TopWindow window;
+  Button button(window, "Press Me");
+  center(button);
+
+  //dialog widget
+  Dialog dia(Rect(20, 70, 300, 200));
+  dia.title(Image("icon:microchip_logo_black.png;64"), "Button Status");
+
+  auto text = make_shared <TextBox>("You pressed the button!");
+  text->readonly(true);
+
+  dia.widget(expand(text));
+  window.add(dia);
+
+  //event handling
+  button.on_event([ & ](Event & event)
+  {
+      if (event.id() == EventId::pointer_click)
+      {
+          dia.show();
+          cout << "clicked!" << endl;
+      }
+  });
+
+  window.show();
+  return app.run();
+}

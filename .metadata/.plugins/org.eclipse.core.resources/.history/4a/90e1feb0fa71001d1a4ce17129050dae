@@ -1,0 +1,80 @@
+/*
+ * Copyright (C) 2018 Microchip Technology Inc.  All rights reserved.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+/// @[Example]
+#include <codecvt>
+#include <egt/ui>
+#include <locale>
+#include <sstream>
+#include <string>
+#include <egt/ui>
+#include <iostream>
+using namespace std;
+using namespace egt;
+
+int main(int argc, char** argv)
+{
+
+
+
+   // egt::Application app(argc, argv);
+	Application app;
+    egt::TopWindow window;
+    egt::VerticalBoxSizer vsizer(window);
+    expand(vsizer);
+
+   // egt::ImageLabel logo(egt::Image("icon:egt_logo_black.png;128"));
+    //vsizer.add(logo);
+
+  //  egt::Label title("Keyboard Events");
+   // vsizer.add(title);
+
+  // egt::HorizontalBoxSizer hsizer(vsizer);
+ //  expand(hsizer);
+
+   // egt::ListBox list(hsizer);
+  //  expand(list);
+    Button button(window, "swipe for expression");
+      button.align(AlignFlag::center | AlignFlag::expand_horizontal);
+      button.on_event([ & ](Event & event)
+   // list.on_event([&list](egt::Event & event)
+    {
+
+        if (event.id() == egt::EventId::keyboard_down)
+        { //ss << " down";
+
+        cout << "k11111111!" << endl;
+        TopWindow window;
+              egt::VideoWindow player(window.content_area(), "file:/root/videoplayback.mpg");
+              	                    window.add(player);
+              	                    player.volume(50);
+              	                    player.show();
+              	                    player.play();
+              	                    window.show();
+              	                  return app.run();
+        }
+     //   else if (event.id() == egt::EventId::keyboard_up)
+       // {  ///ss << " up";
+       // cout << "k2222222222" << endl;
+        	                //    return app.run();
+       // }
+        else if (event.id() == egt::EventId::keyboard_repeat)
+            {
+        	cout << "k3333333" << endl;
+
+            }
+
+     if (event.key().unicode)
+       {
+}
+
+    }, {egt::EventId::keyboard_down,
+        egt::EventId::keyboard_up,
+        egt::EventId::keyboard_repeat
+       });
+    window.show();
+   return app.run();
+}
+/// @[Example]

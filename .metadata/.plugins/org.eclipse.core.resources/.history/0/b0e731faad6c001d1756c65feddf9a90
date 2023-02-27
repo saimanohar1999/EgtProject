@@ -1,0 +1,18 @@
+#include <egt/ui>
+#include <iostream>
+using namespace std;
+using namespace egt;
+
+int main(int argc, const char** argv)
+{
+  Application app;
+  TopWindow window;
+  egt::VideoWindow player(window.content_area(), "root:/videop.mp4");
+             window.add(player);
+             player.volume(50);
+             player.show();
+             player.play();
+  window.show();
+
+  return app.run();
+}

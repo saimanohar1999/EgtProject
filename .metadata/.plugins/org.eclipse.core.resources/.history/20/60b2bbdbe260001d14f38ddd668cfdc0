@@ -1,0 +1,29 @@
+#include <egt/ui>
+#include <iostream>
+using namespace std;
+using namespace egt;
+ 
+int main(int argc, const char ** argv)
+{
+    Application app;
+    TopWindow window;
+    Button button(window, "Press Me");
+    center(button);
+ 
+    //periodic timer
+    Label CPUlabel("CPU:---", Rect(0, 0, 100, 50));
+    window.add(bottom(CPUlabel));
+    egt::experimental::CPUMonitorUsage tools;
+    PeriodicTimer cputimer(std::chrono::seconds(1));
+    cputimer.on_timeout([ & CPUlabel, & tools]() {
+        cout << "periodic timer fired!" << endl;
+        tools.update();
+        ostringstream ss;
+        ss << "CPU: " << static_cast < int > (tools.usage()) << "%";
+        CPUlabel.text(ss.str());
+    });
+    cputimer.start();
+ 
+    window.show();
+    return app.run();
+}

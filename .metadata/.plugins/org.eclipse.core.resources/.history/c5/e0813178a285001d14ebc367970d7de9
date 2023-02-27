@@ -1,0 +1,224 @@
+extern "C" {
+#include <stdio.h> // C standard libraries
+#include <stdlib.h>
+#include <unistd.h>
+#include <fcntl.h>
+
+//#include <linux/gpio.h> // GPIO control not used
+#include <sys/ioctl.h> // interface between user space and kernel in our case with I2C driver
+#include <linux/i2c.h> // I2C interface
+#include <linux/i2c-dev.h> // I2C interface
+
+//#define DEV_GPIO "/dev/gpiochip0" //not used
+#define DEV_I2C "/dev/i2c-1"
+#define DEV_BLUELED "/sys/class/leds/blue/brightness"
+#define DEV_GREENLED "/sys/class/leds/green/brightness"
+
+#define SLAVE_ADDR 0x4C  /* EMC1414 I2C slave address */
+};
+
+#include <egt/ui> // Libs for EGT
+#include <iostream>
+#include <string>
+#include <fstream>
+
+using namespace egt;
+using namespace std;
+
+extern "C" {
+
+		int readtemp();
+    };
+
+char timersecflag =0;
+
+int main(int argc, const char ** argv)
+{
+	Application app;
+	TopWindow window;
+
+	egt::Button button3(window, "Press USER_BUTTON on the board");
+	center(button3);
+
+	 //-lamba fct to add an event to button3
+	button3.on_event([&button3](egt::Event & event)
+	{
+		#define USER_BUTTON 0
+		cout << "event received" << event.key().keycode << endl;
+		if (event.key().keycode == USER_BUTTON)
+		{
+			if (event.id() == egt::EventId::keyboard_down)
+			{
+				//button.active(true);
+				button3.text("Pressed");
+			} else if (event.id() == egt::EventId::keyboard_up)
+			{
+				//button.active(false);
+				button3.text("Released");
+			}
+		}
+	});  //-end lamba-fct 'button3.on_event()'
+
+	Button button(window, "Blue LED");
+	Button button2(window, "Green LED");
+	Label title (window, "EGT HW Control demo");
+
+	int blueledflag, greenledflag;
+	ofstream blueled, greenled; // open files
+	 //---Turn off all LEDs---
+	 // Blue LED OFF
+	blueled.open (DEV_BLUELED); //open the file which represents GreenLED device
+	blueled << "0";
+	blueled.close();
+	blueledflag = 0 ;
+	 // Green LED OFF
+	greenled.open (DEV_GREENLED); //open the file which represents GreenLED device
+	greenled << "0";
+	greenled.close();
+	greenledflag = 0 ;
+	 // add label on screen
+	Label CPUlabel("CPU:---", Rect(0,0,50,80));
+	window.add(bottom(CPUlabel));
+
+	egt::experimental::CPUMonitorUsage tools;
+	PeriodicTimer cputimer(std::chrono::seconds(1));
+	 // lamba-fct to define what should happen on each timer-tick
+	cputimer.on_timeout([ & CPUlabel, & tools]()
+	{
+		cout << "Periodic timer fired!" << endl;
+		int a;
+		a = readtemp(); //read temperature sensor each second thanks to the timer
+		timersecflag = 1;
+		tools.update();
+		ostringstream ss;
+
+		ss << "Temperature:" << a << "\n";
+		CPUlabel.text(ss.str());
+
+		ss << " CPU: " << static_cast < int > (tools.usage()) << "%";
+		CPUlabel.text(ss.str());
+
+	}); //-end lamba-fct 'cputimer.on_timeout()'
+
+	cputimer.start();
+
+	title.align(AlignFlag::expand_horizontal);
+	Font new_font("Serif",45, Font::Weight::bold, Font::Slant::italic);
+	title.font(new_font);
+	Font new_font2("Serif",30);
+	CPUlabel.font(new_font2);
+
+	button.align(AlignFlag::center | AlignFlag::left);
+	button2.align(AlignFlag::center | AlignFlag::right);
+
+	 //-lamba-fct to define action on if 'button' is pressed
+	button.on_event ([&] (Event& event)
+	{
+		if (event.id() == EventId::pointer_click)
+	    {
+			if ( blueledflag == 0 ) {
+				cout << "clicked" << endl;
+				//blue led on
+				blueled.open (DEV_BLUELED);
+				blueled << "1";
+				blueled.close();
+				blueledflag = 1 ;
+			} else {
+				cout << "clicked" << endl;
+				//Blue led off
+				blueled.open (DEV_BLUELED);
+				blueled << "0";
+				blueled.close();
+				blueledflag = 0 ;
+			}
+		}
+	}); //-end lamba-fct 'button.on_event()'
+
+	 //-lamba-fct to define action on if 'button2' is pressed
+	button2.on_event([&] (Event& event)
+	{
+		if (event.id() == EventId::pointer_click)
+		{
+			if ( greenledflag == 0 ) {
+				cout << "clicked" << endl;
+				 //Green led on
+				greenled.open (DEV_GREENLED);
+				greenled << "1";
+				greenled.close();
+				greenledflag = 1 ;
+			} else {
+				cout << "clicked" << endl;
+				 //Green led off
+				greenled.open (DEV_GREENLED);
+				greenled << "0";
+				greenled.close();
+				greenledflag = 0 ;
+			}
+		}
+	}); //-end lamba-fct 'button2.on_event()'
+
+	//button.move(Point(300,300));
+	//cout << "X:" << button.x() << "Y;" << button.y() << endl;
+
+	BoxSizer sizer (Orientation::horizontal);
+	ImageLabel imagelable1 (sizer, Image("icon:clouda.png;128"));
+	window.add(expand_horizontal (bottom(sizer)));
+	window.show();
+
+	return app.run();
+} //- end main()
+
+
+extern "C" int readtemp()
+{
+	char tempstrbuf[80];
+	string strtemp;
+
+	int fd;
+	int ret;
+    unsigned char buf[2];
+
+	// Open device node
+	   fd = open(DEV_I2C, O_RDWR);
+	   if (fd <0) {
+	   	printf ("ERROR open %s ret=%d\n", DEV_I2C, fd);
+	   	return -1;
+	   }
+	   if (ioctl (fd, I2C_SLAVE, SLAVE_ADDR) < 0) {
+	   	printf("ERROR ioctl() set slave address\n");
+	   	return -1;
+	   		   	}
+	   		   	// Set conversation rate
+	   		   	buf[0] = 0x04; // conversion rate register address
+	   		   	buf[1] = 0x04; // Set conversion rate to 1 sec
+	   		   	ret = write(fd, buf, 2);
+	   		   	if (ret!= 2) {
+	   		   		printf ("Error write() conversion rate\n");
+	   		   		return -1;
+	   		   	    }
+	   		 // Read Temperature
+	   		 	   	// Set internal address register pointer
+	   		 	   	buf[0] = 0x00; //internal Diode High byte register address
+	   		 	   	ret = write (fd, &buf[0], 1 );
+	   		 	   	if (ret!= 1) {
+	   		 	   	   printf ("Error write() Register address \n");
+	   		 	   	   return -1;
+	   		 	   	   }
+	   		 	//read temperature
+	   		 		//Read DATA
+	   		 		buf[1] = 0; //clear receive buffer
+	   		 		ret = read(fd, &buf[1], 1);
+	   		 		if (ret!= 1) {
+	   		 		printf ("Error read() data \n");
+	   		 			   return -1;
+	   		 			   }
+	   		 			sprintf(tempstrbuf, "Temperature is %d\n", buf[1]);
+	   		 			strtemp = tempstrbuf;
+	   		 			//cout << strtemp;
+
+	   		 			//close device node
+	   		 			close(fd);
+	   		 			return buf[1];
+};
+
+

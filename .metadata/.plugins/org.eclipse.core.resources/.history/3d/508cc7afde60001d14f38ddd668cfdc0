@@ -1,0 +1,36 @@
+#include <egt/ui>
+#include <iostream>
+
+using namespace std;
+using namespace egt;
+
+int main(int argc, const char ** argv)
+{
+  Application app;
+  TopWindow window;
+  Button button(window, "Press Me");
+
+//  center(button);
+//  button.align(AlignFlag::center | AlignFlag::left);
+
+  button.move(Point(300,300));
+  cout << "X:" << button.x() << " Y:" << button.y() << endl;
+
+  //change widget width and height
+  button.width(button.width()*2);
+  button.height(70);
+  cout << "width:" << button.width() << " height:" << button.height() << endl;
+
+  Label title(window, "EGT Lab Demos");
+  title.align(AlignFlag::expand_horizontal);
+
+  Font new_font("Serif",45, Font::Weight::bold, Font::Slant::italic);
+  title.font(new_font);
+
+  title.color(Palette::ColorId::label_text, Palette::white);
+  title.color(Palette::ColorId::label_bg, Palette::red);
+  title.fill_flags(Theme::FillFlag::solid);
+
+  window.show();
+  return app.run();
+}

@@ -1,0 +1,16 @@
+#include <egt/ui>
+#include <iostream>
+//using namespace std;
+using namespace egt;
+
+int main(int argc, const char** argv)
+{
+	Application app(argc, argv);
+  TopWindow window;
+
+  //BoxSizer sizer(orientation::horizontal);
+window.set_background(Image("@128px/home.png"));
+//window.add(expand_horizontal(bottom(sizer)));
+  window.show();
+  return app.run();
+}

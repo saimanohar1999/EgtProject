@@ -1,0 +1,31 @@
+#include <egt/ui>
+#include <iostream>
+using namespace std;
+using namespace egt;
+
+int main(int argc, char ** argv)
+{
+
+egt::Application app(argc, argv);
+egt::TopWindow window;
+window.background(egt::Image("file:cyberpunk-robot-wallpaper-800x480_12.jpg"));
+Button button(window, "Press Me");
+center(button);
+
+
+button.on_event([ & ](Event & event)
+		{
+	if (event.id() == EventId::pointer_click)
+	{   BoxSizer sizer(Orientation::horizontal);
+		ImageLabel imagelabel1(sizer, Image("file:pngtree-abstract-heart-beats-line-life-image_1320159.jpg"));
+		window.add(expand_horizontal(center(sizer)));
+		cout << "clicked!" << endl;
+	}
+		});
+window.show();
+
+return app.run();
+}
+
+
+

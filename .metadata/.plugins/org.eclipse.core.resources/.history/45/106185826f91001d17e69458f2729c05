@@ -1,0 +1,26 @@
+#include <stdio.h> // C standard libraries
+#include <stdlib.h>
+#include <unistd.h>
+#include <fcntl.h>
+
+//#include <linux/gpio.h> // GPIO control not used
+#include <sys/ioctl.h> // interface between user space and kernel in our case with I2C driver
+#include <linux/i2c.h> // I2C interface
+#include <linux/i2c-dev.h> // I2C interface
+
+//#define DEV_GPIO "/dev/gpiochip0" //not used
+#define DEV_I2C "/dev/i2c-1"
+#define DEV_BLUELED "/sys/class/leds/blue/brightness"
+#define DEV_GREENLED "/sys/class/leds/green/brightness"
+#include<iostream>
+using namespace std;
+
+int main()
+{
+		while(1)
+		{
+			system("./bend");
+		//int result = system("/usr/bin/python3 testMAX30100.py 1");
+	   // cout << result;
+		}
+}

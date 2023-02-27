@@ -1,0 +1,27 @@
+
+
+
+
+
+
+
+#include <egt/ui>
+#include <iostream>
+using namespace std;
+using namespace egt;
+
+int main(int argc, const char** argv)
+{
+  Application app;
+  TopWindow window;
+  VideoWindow player(window.content_area(),
+		  "/home/i63349-lnx/manohar/newbb/egt/videop.avi");
+  window.add(player);
+  player.set_volume(8);
+  player.show();
+  player.play();
+  window.show();
+
+  return app.run();
+}
+

@@ -1,0 +1,29 @@
+#include <egt/ui>
+#include <iostream>
+using namespace std;
+using namespace egt;
+
+int main(int argc, char ** argv)
+{
+
+egt::Application app(argc, argv);
+egt::TopWindow window;
+window.background(egt::Image("file:background.png"));
+Button button(window, "Press Me");
+center(button);
+
+
+button.on_event([ & ](Event & event)
+		{
+	if (event.id() == EventId::pointer_click)
+	{
+		cout << "clicked!" << endl;
+	}
+		});
+window.show();
+
+return app.run();
+}
+
+
+

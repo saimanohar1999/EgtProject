@@ -1,0 +1,6 @@
+11:24:05 **** Incremental Build of configuration Release for project egttest ****
+make all 
+make: Nothing to be done for 'all'.
+
+11:24:06 Build Finished. 0 errors, 0 warnings. (took 685ms)
+

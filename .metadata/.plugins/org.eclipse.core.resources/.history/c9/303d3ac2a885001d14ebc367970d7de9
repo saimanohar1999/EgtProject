@@ -1,0 +1,146 @@
+#include <fcntl.h>
+#include <stdlib.h>
+#include <linux/i2c-dev.h>
+#include <linux/i2c.h>
+#include <sys/ioctl.h>
+#include <math.h>
+#include <unistd.h>
+#include <stdio.h>
+#include "smbus.h"
+
+#define BMP180_I2C_ADDRESS 0x57
+
+// Open a connection to the bmp085
+// Returns a file id
+int begin()
+{
+	int fd = 0;
+	char *fileName = "/dev/i2c-1";
+
+	// Open port for reading and writing
+	if ((fd = open(fileName, O_RDWR)) < 0)
+	{
+		exit(1);
+	}
+
+	// Set the port options and set the address of the device
+	if (ioctl(fd, I2C_SLAVE, BMP180_I2C_ADDRESS) < 0)
+	{
+		close(fd);
+		exit(1);
+	}
+
+	return fd;
+}
+
+// Read two words from the BMP085 and supply it as a 16 bit integer
+__s32 i2cReadInt(int fd, __u8 address)
+{
+	__s32 res = i2c_smbus_read_word_data(fd, address);
+	if (0 > res)
+	{
+		close(fd);
+		exit(1);
+	}
+
+	// Convert result to 16 bits and swap bytes
+	res = ((res<<8) & 0xFF00) | ((res>>8) & 0xFF);
+
+	return res;
+}
+
+//Write a byte to the BMP085
+void i2cWriteByteData(int fd, __u8 address, __u8 value)
+{
+	if (0 > i2c_smbus_write_byte_data(fd, address, value))
+	{
+		close(fd);
+		exit(1);
+	}
+}
+
+// Read a block of data BMP085
+void i2cReadBlockData(int fd, __u8 address, __u8 length, __u8 *values)
+{
+	if (0 > i2c_smbus_read_i2c_block_data(fd, address,length,values))
+	{
+		close(fd);
+		exit(1);
+	}
+}
+
+int getHeartRate()
+{
+	u_int8_t values[4]={0};
+	int iMode, iSampleRate=0;
+	int fd = begin();
+	unsigned int IR, RED;
+	//unsigned int up ;
+	iMode = i2c_smbus_read_word_data(fd,0x06);
+	i2cWriteByteData(fd,0x06,iMode & 0x74); //HR only
+	i2cWriteByteData(fd,0x06,(iMode & 0x74 ) | 0x2); //HR only
+
+    i2cWriteByteData(fd,0x09,0x33); // (0x3 << 4 | 0x3)// LED typical current
+
+	// Write 0x34+(BMP085_OVERSAMPLING_SETTING<<6) into register 0xF4
+	// Request a pressure reading w/ oversampling setting
+	iSampleRate = i2c_smbus_read_word_data(fd,0x07);
+	i2cWriteByteData(fd,0x07, (iSampleRate & 0xFC) | (0x03) ); // Sample Rate set to 100
+
+
+
+
+
+	// Wait for conversion, delay time dependent on oversampling setting
+
+
+	while(1)
+	{
+		usleep(1000 * 1000 * 2);
+		i2cReadBlockData(fd, 0x05, 4, values);
+		 IR = ((unsigned int) values[0] << 8) | ((unsigned int) values[1]);
+		 RED = ((unsigned int) values[2] << 8) | ((unsigned int) values[3]);
+		 //printf.
+	}
+	// Close the i2c file
+	close(fd);
+
+	return 0;
+
+}
+
+int get_temperature()
+{
+int fd = begin();
+
+// Write 0x34+(BMP085_OVERSAMPLING_SETTING<<6) into register 0xF4
+// Request a pressure reading w/ oversampling setting
+i2cWriteByteData(fd,0x07,0x07); // Sample Rate set to 100
+
+i2cWriteByteData(fd,0x09,0x33); // LED typical current
+
+i2cWriteByteData(fd,0x06,0x0A); //HR only & Temp_en
+
+// Wait for conversion, delay time dependent on oversampling setting
+usleep(1000);
+
+// Read the three byte result from 0xF6
+// 0xF6 = MSB, 0xF7 = LSB and 0xF8 = XLSB
+
+
+unsigned int up ;
+
+up=i2c_smbus_read_byte(0x16);
+// Close the i2c file
+close(fd);
+
+return up;
+}
+
+
+int main()
+{
+	printf("Temperature :%d m\n", get_temperature());
+
+	return 0;
+}

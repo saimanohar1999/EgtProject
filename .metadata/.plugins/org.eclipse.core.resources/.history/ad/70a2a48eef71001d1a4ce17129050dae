@@ -1,0 +1,39 @@
+#include <egt/ui>
+#include <iostream>
+#include<linux/gpio.h>
+#include<fcntl.h>
+#include<sys/ioctl.h>
+
+using namespace std;
+using namespace egt;
+int main(int argc, const char** argv)
+{
+	int fd;
+Application app;
+TopWindow window;
+BoxSizer sizer(Orientation::horizontal);
+ImageLabel imagelabel1(sizer, Image("icon:home.png;128"));
+ImageLabel imagelabel2(sizer, Image("icon:camera.png;128"));
+ImageLabel imagelabel3(sizer, Image("icon:calendar.png;128"));
+ImageLabel imagelabel4(sizer, Image("icon:settings.png;128"));
+window.add(expand_horizontal(bottom(sizer)));
+window.show();
+
+
+imagelabel1.on_event([ & ](Event & event)
+{
+if (event.id() == EventId::pointer_click)
+{
+cout << "clicked!" << endl;
+egt::VideoWindow player(window.content_area(), "file:/root/videoplayback.mpg");
+            window.add(player);
+            player.volume(50);
+            player.show();
+            player.play();
+            window.show();
+            return app.run();
+
+}
+});
+return app.run();
+}

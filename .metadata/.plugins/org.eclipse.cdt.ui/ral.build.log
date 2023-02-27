@@ -1,0 +1,17 @@
+11:24:33 **** Incremental Build of configuration Release for project ral ****
+make all 
+Building file: ../widgets.cpp
+Invoking: Cross G++ Compiler
+arm-buildroot-linux-gnueabi-g++ -O3 -Wall -c -fmessage-length=0 -MMD -MP -MF"widgets.d" -MT"widgets.o" -o "widgets.o" "../widgets.cpp"
+In file included from /home/i63349-lnx/manohar/newbb/buildroot-at91/output/host/arm-buildroot-linux-gnueabi/sysroot/usr/include/egt/button.h:17,
+                 from /home/i63349-lnx/manohar/newbb/buildroot-at91/output/host/arm-buildroot-linux-gnueabi/sysroot/usr/include/egt/ui:16,
+                 from ../widgets.cpp:1:
+/home/i63349-lnx/manohar/newbb/buildroot-at91/output/host/arm-buildroot-linux-gnueabi/sysroot/usr/include/egt/image.h:14:10: fatal error: cairo.h: No such file or directory
+   14 | #include <cairo.h>
+      |          ^~~~~~~~~
+compilation terminated.
+make: *** [subdir.mk:20: widgets.o] Error 1
+"make all" terminated with exit code 2. Build might be incomplete.
+
+11:24:39 Build Failed. 2 errors, 0 warnings. (took 6s.779ms)
+
